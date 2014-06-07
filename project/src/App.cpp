@@ -27,8 +27,16 @@ public:
     virtual ~wxWidgetsApp() { }
     virtual bool OnInit()
     {
-       wxImage::AddHandler(new wxGIFHandler);
-       //wxImage::AddHandler(new wxBMPHandler);
+       wxImage::AddHandler( new wxPNGHandler );
+	   wxImage::AddHandler( new wxJPEGHandler );
+	   wxImage::AddHandler( new wxGIFHandler );
+	   wxImage::AddHandler( new wxPNMHandler );
+	   wxImage::AddHandler( new wxPCXHandler );
+	   wxImage::AddHandler( new wxICOHandler );
+	   wxImage::AddHandler( new wxCURHandler );
+	   wxImage::AddHandler( new wxANIHandler );
+	   wxImage::AddHandler( new wxTGAHandler );
+	   wxImage::AddHandler( new wxXPMHandler );
 
        val_call0(sgOnInit);
 
