@@ -30,6 +30,7 @@ class EventHandler
 	   "middleIsDown"
 	   "rightIsDown"
 	   "wheelDelta"
+	   "wheelRotation"
 	   "controlDown"
 	   "metaDown"
 	   "shiftDown"

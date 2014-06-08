@@ -445,6 +445,7 @@ bool HaxeEventHandler::ProcessEvent(wxEvent& event)
 		alloc_field(obj,val_id("middleIsDown"),alloc_bool(me->MiddleIsDown()));
 		alloc_field(obj,val_id("rightIsDown"),alloc_bool(me->RightIsDown()));
 		alloc_field(obj,val_id("wheelDelta"),alloc_bool(me->GetWheelDelta()));
+		alloc_field(obj,val_id("wheelRotation"),alloc_int(me->GetWheelRotation()));
 		alloc_field(obj,val_id("controlDown"),alloc_bool(me->ControlDown()));
 		alloc_field(obj,val_id("metaDown"),alloc_bool(me->MetaDown()));
 		alloc_field(obj,val_id("shiftDown"),alloc_bool(me->ShiftDown()));
