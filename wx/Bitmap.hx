@@ -58,7 +58,13 @@ class Bitmap
    {
       return new Bitmap( wx_bitmap_from_file(name,type) );
    }
+   
+   public static function fromImage(img:Image, type:Int=-1)
+   {
+      return new Bitmap( wx_bitmap_from_image(img.wxHandle,type) );
+   }
 
    static var wx_bitmap_from_bytes = Loader.load("wx_bitmap_from_bytes",1);
    static var wx_bitmap_from_file = Loader.load("wx_bitmap_from_file",2);
+   static var wx_bitmap_from_image = Loader.load("wx_bitmap_from_image",2);
 }
