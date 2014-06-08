@@ -1,11 +1,13 @@
 #include "HaxeAPI.h"
+#include <wx/dcbuffer.h>
 
 value wx_dc_create_paint(value inWindow)
 {
 	wxWindow *window;
 	if (ValueToWX(inWindow,window))
 	{
-		wxPaintDC *dc = new wxPaintDC(window);
+		// wxPaintDC *dc = new wxPaintDC(window);
+		wxAutoBufferedPaintDC *dc = new wxAutoBufferedPaintDC(window);
 		return WXToDeletingValue(dc);
 	}
 	return alloc_null();

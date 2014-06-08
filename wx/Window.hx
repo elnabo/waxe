@@ -168,10 +168,6 @@ class Window extends EventHandler
       return inName;
    }
 
-
-
-
-
    // Helpers ...
    public var onClose(null,set) : Dynamic->Void;
    function set_onClose(f:Dynamic->Void) {setHandler(wx.EventID.CLOSE_WINDOW,f); return f;}

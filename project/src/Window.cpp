@@ -5,6 +5,7 @@ value wx_window_create(value inParams)
 	CreationParams params(inParams);
    wxWindow *window = new wxWindow(params.parent,params.id,
 										  params.position,params.size,params.flags);
+   window->SetBackgroundStyle(wxBG_STYLE_CUSTOM);
    return WXToValue(window);
 }
 DEFINE_PRIM(wx_window_create,1)
