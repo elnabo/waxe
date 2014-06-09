@@ -33,6 +33,11 @@ class Image
 		return new Image(wx_image_from_file(name,Type.enumIndex(type)));
 	}
 	
+	public static function getBlankImage(width:Int,height:Int):Image
+	{
+		return new Image(wx_image_blank(width,height));
+	}
+	
 	public function rescale(width:Int, height:Int, quality:WxImageResizeQuality)
 	{
 		wx_image_rescale(wxHandle,width,height,quality);
@@ -48,6 +53,7 @@ class Image
 	}
 	
    static var wx_image_from_file = Loader.load("wx_image_from_file",2);
+   static var wx_image_blank = Loader.load("wx_image_blank",2);
    static var wx_image_rescale = Loader.load("wx_image_rescale",4);
    static var wx_image_copy = Loader.load("wx_image_copy",1);
    static var wx_image_width = Loader.load("wx_image_width",1);

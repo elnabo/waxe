@@ -731,6 +731,8 @@ void SetupEventMap()
        // Help events
       wxEVT_HELP,
       wxEVT_DETAILED_HELP,
+      
+      wxEVT_COMBOBOX_DROPDOWN,
    	-999
    };
 

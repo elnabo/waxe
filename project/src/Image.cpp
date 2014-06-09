@@ -9,6 +9,14 @@ value wx_image_from_file(value name, value type)
 	return alloc_null();
 }
 
+value wx_image_blank(value width, value height)
+{
+	wxImage * image = new wxImage(Val2Int(width),Val2Int(height),true);
+	if (image)
+		return WXToDeletingValue(image);
+	return alloc_null();
+}
+
 void wx_image_rescale(value src, value width, value height, value quality)
 {
 	wxImage * image;
@@ -47,6 +55,7 @@ value wx_image_height(value img)
 }
 
 DEFINE_PRIM(wx_image_from_file,2)
+DEFINE_PRIM(wx_image_blank,2)
 DEFINE_PRIM(wx_image_rescale,4)
 DEFINE_PRIM(wx_image_copy,1)
 DEFINE_PRIM(wx_image_width,1)

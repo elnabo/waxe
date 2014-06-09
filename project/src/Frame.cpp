@@ -11,7 +11,7 @@ value wx_frame_create(value inParams)
 
 DEFINE_PRIM(wx_frame_create,1)
 
-value wx_frame_set_menu_bar(value inFrame, value inBar)
+void wx_frame_set_menu_bar(value inFrame, value inBar)
 {
    wxFrame *frame;
    if (ValueToWX(inFrame,frame))
@@ -20,7 +20,6 @@ value wx_frame_set_menu_bar(value inFrame, value inBar)
       ValueToWX(inBar,bar);
       frame->SetMenuBar(bar);
    }
-   return alloc_null();
 }
 DEFINE_PRIM(wx_frame_set_menu_bar,2)
 
