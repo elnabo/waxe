@@ -181,6 +181,35 @@ class Window extends EventHandler
          { var dc = wx.DC.createPaintDC(me); f(dc); dc.destroy(); } );
       return f;
    }
+   
+   public function setForegroundColor(r:Int, g:Int, b:Int, a:Int)
+   {
+	   wx_window_set_foreground_colour(wxHandle,r,g,b,a);
+   }
+   
+   public function setFontSize(pt:Int)
+   {
+	   wx_window_set_font_size(wxHandle,pt);
+   }
+   
+   public function freeze()
+   {
+	   wx_window_freeze(wxHandle);
+   }
+   
+   public function thaw()
+   {
+	   wx_window_thaw(wxHandle);
+   }
+   
+   public function enable()
+   {
+	   wx_window_enable(wxHandle);
+   }
+   public function disable()
+   {
+	   wx_window_disable(wxHandle);
+   }
 
 
 
@@ -202,6 +231,12 @@ class Window extends EventHandler
    static var wx_window_set_name = Loader.load("wx_window_set_name",2);
    static var wx_window_refresh = Loader.load("wx_window_refresh",1);
    static var wx_window_destroy = Loader.load("wx_window_destroy",1);
+   static var wx_window_set_foreground_colour = Loader.load("wx_window_set_foreground_colour",5);
+   static var wx_window_set_font_size = Loader.load("wx_window_set_font_size",2);
+   static var wx_window_freeze = Loader.load("wx_window_freeze",1);
+   static var wx_window_thaw = Loader.load("wx_window_thaw",1);
+   static var wx_window_enable = Loader.load("wx_window_enable",1);
+   static var wx_window_disable = Loader.load("wx_window_disable",1);
 }
 
 
