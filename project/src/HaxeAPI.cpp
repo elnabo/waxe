@@ -784,6 +784,7 @@ int link_Menu();
 int link_Notebook();
 int link_Panel();
 int link_Pen();
+int link_RadioButton();
 int link_Scintilla();
 int link_Sizer();
 int link_StaticBox();
@@ -817,6 +818,7 @@ extern "C" int waxe_register_prims()
    link_Notebook();
    link_Panel();
    link_Pen();
+   link_RadioButton();
    link_Scintilla();
    link_Sizer();
    link_StaticBox();

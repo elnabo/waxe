@@ -101,6 +101,16 @@ void wx_window_disable(value inWindow)
 }
 DEFINE_PRIM(wx_window_disable,1)
 
+void wx_window_close(value inWindow, value force)
+{
+	wxWindow *window;
+	if (ValueToWX(inWindow,window))
+	{
+		window->Close(Val2Bool(force));
+	}
+}
+DEFINE_PRIM(wx_window_close,2)
+
 
 
 WIN_PROPERTY(wx_window,wxWindow,size,GetSize,SetSize,Val2Size)

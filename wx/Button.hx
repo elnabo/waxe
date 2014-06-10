@@ -19,7 +19,7 @@ class Button extends Window
    }
 
 
-   public function new(inHandle:Dynamic)
+   function new(inHandle:Dynamic)
    {
 	   super(inHandle);
    }

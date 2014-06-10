@@ -206,9 +206,15 @@ class Window extends EventHandler
    {
 	   wx_window_enable(wxHandle);
    }
+   
    public function disable()
    {
 	   wx_window_disable(wxHandle);
+   }
+   
+   public function close(?force:Bool=false)
+   {
+	   wx_window_close(wxHandle,force);
    }
 
 
@@ -237,6 +243,7 @@ class Window extends EventHandler
    static var wx_window_thaw = Loader.load("wx_window_thaw",1);
    static var wx_window_enable = Loader.load("wx_window_enable",1);
    static var wx_window_disable = Loader.load("wx_window_disable",1);
+   static var wx_window_close = Loader.load("wx_window_close",2);
 }
 
 
