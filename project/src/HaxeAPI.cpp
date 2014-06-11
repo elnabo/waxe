@@ -733,6 +733,7 @@ void SetupEventMap()
       wxEVT_DETAILED_HELP,
       
       wxEVT_COMBOBOX_DROPDOWN,
+      wxEVT_CHOICE,
    	-999
    };
 
@@ -769,6 +770,7 @@ int link_Bitmap();
 int link_Brush();
 int link_Button();
 int link_CheckBox();
+int link_Choice();
 int link_Clay();
 int link_ComboBox();
 int link_DC();

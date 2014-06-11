@@ -44,6 +44,7 @@
    <file name="src/ListBox.cpp"/>
    <file name="src/CheckBox.cpp"/>
    <file name="src/ComboBox.cpp"/>
+   <file name="src/Choice.cpp"/>
    <file name="src/DC.cpp"/>
    <file name="src/Pen.cpp"/>
    <file name="src/Brush.cpp"/>

@@ -159,4 +159,5 @@ enum EventID
     
     
     COMMAND_COMBOBOX_DROPDOWN;
+    CHOICE;
 }
