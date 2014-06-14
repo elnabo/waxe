@@ -7,7 +7,7 @@ class Choice extends ControlWithItems
 	public var label(get,set):String;
 	public var value(get,null):String;
 	public var selection(get,set):Int;
-	public var onSelected(null,set) : Dynamic->Void;
+	public var onSelected(null,set) : Dynamic->Void = function(_:Dynamic):Void{};
 
    public static function create(inParent:Window, ?inID:Null<Int>, 
 	                ?inPosition:Position,
@@ -24,11 +24,6 @@ class Choice extends ControlWithItems
    public function new(inHandle:Dynamic)
    {
 	   super(inHandle);
-	   onSelected = function(e:Dynamic)
-	   {
-		   trace("selected",e);
-		   //~ sle
-	   }
    }
 
 	function set_onSelected(f:Dynamic->Void)
@@ -41,7 +36,7 @@ class Choice extends ControlWithItems
 	{
 		var v = wx_choice_get_selection(wxHandle);
 		if (v >= 0)
-			return wx_choice_get_string(wxHandle,v);
+			return get_string(v);
 		return null;
 	}
 	
@@ -60,6 +55,16 @@ class Choice extends ControlWithItems
 		return wx_choice_get_selection(wxHandle);
 	}
 	
+	function get_string(id:Int):String
+	{
+		return wx_choice_get_string(wxHandle,id);
+	}
+	
+	public function find_string(val:String):Int
+	{
+		return wx_choice_find_string(wxHandle,val);
+	}
+	
 	function set_selection(i:Int):Int
 	{
 		wx_choice_set_selection(wxHandle,i);
@@ -72,6 +77,7 @@ class Choice extends ControlWithItems
    static var wx_choice_get_selection = Loader.load("wx_choice_get_selection",1);
    static var wx_choice_set_selection = Loader.load("wx_choice_set_selection",2);
    static var wx_choice_get_string = Loader.load("wx_choice_get_string",2);
+   static var wx_choice_find_string = Loader.load("wx_choice_find_string",2);
    static var wx_choice_clear = Loader.load("wx_choice_clear",1);
    static var wx_choice_append = Loader.load("wx_choice_append",2);
 }

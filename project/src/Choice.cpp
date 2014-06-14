@@ -101,6 +101,17 @@ value wx_choice_get_string(value parent,value index)
 }
 DEFINE_PRIM(wx_choice_get_string,2)
 
+value wx_choice_find_string(value parent,value str)
+{
+	wxChoice * choice;
+	if (ValueToWX(parent,choice))
+	{
+		return alloc_int(choice->FindString(Val2Str(str)));
+	}
+	return alloc_null();
+}
+DEFINE_PRIM(wx_choice_find_string,2)
+
 
 int link_Choice() { return 0; }
 

@@ -1,6 +1,8 @@
 #include "HaxeAPI.h"
 #include <map>
 
+
+#include <iostream>
 // --- Helpers --------------------------------------------
 
 DEFINE_KIND(gObjectKind);
@@ -405,7 +407,7 @@ int FlashCode(int inKey)
 bool HaxeEventHandler::ProcessEvent(wxEvent& event)
 {
    value data = val_null;
-
+   
    wxString name;
    wxWindow *window = wxDynamicCast(event.GetEventObject(), wxWindow);
    if (window)
@@ -421,12 +423,15 @@ bool HaxeEventHandler::ProcessEvent(wxEvent& event)
    }
 
 	// ?
+	int haxe_id;
 	if (gWX2HaxeIDMap.find(type)==gWX2HaxeIDMap.end())
 	{
-      return wxEvtHandler::ProcessEvent(event);
+      haxe_id = type;
 	}
-
-	int haxe_id = gWX2HaxeIDMap[type];
+	else
+	{
+		 haxe_id = gWX2HaxeIDMap[type];
+	}
 
 	value obj = alloc_empty_object();
 
@@ -467,6 +472,12 @@ bool HaxeEventHandler::ProcessEvent(wxEvent& event)
 		alloc_field(obj,val_id("flashCode"),alloc_int(FlashCode(code)));
 	}
 
+	wxCommandEvent *ce = wxDynamicCast(&event,wxCommandEvent);
+	if (ce)
+	{
+		alloc_field(obj,val_id("string"),alloc_string(ce->GetString()));
+		alloc_field(obj,val_id("int"),alloc_int(ce->GetInt()));
+	}
 
 	val_ocall1(*mObject,val_id("_handle_event"),obj);
 
@@ -773,8 +784,11 @@ int link_CheckBox();
 int link_Choice();
 int link_Clay();
 int link_ComboBox();
+int link_CommandEvent();
 int link_DC();
 int link_Dialog();
+int link_Event();
+int link_EvtHandler();
 int link_Font();
 int link_Frame();
 int link_GLCanvas();

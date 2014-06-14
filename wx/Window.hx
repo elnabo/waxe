@@ -108,6 +108,11 @@ class Window extends EventHandler
    {
       wxEventHandlers.set(Type.enumIndex(inID),inFunc);
    }
+   
+   public function customHandler(id:Int,inFunc:Dynamic->Void)
+   {
+	   wxEventHandlers.set(id,inFunc);
+   }
 
    public function fit() { wx_window_fit(wxHandle); }
    public function refresh() { wx_window_refresh(wxHandle); }
