@@ -793,6 +793,7 @@ int link_Font();
 int link_Frame();
 int link_GLCanvas();
 int link_HaxeAPI();
+int link_Icon();
 int link_Image();
 int link_ListBox();
 int link_MDI();

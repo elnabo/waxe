@@ -51,6 +51,7 @@
    <file name="src/Font.cpp"/>
    <file name="src/Bitmap.cpp"/>
    <file name="src/Image.cpp"/>
+   <file name="src/Icon.cpp"/>
    <file name="src/Menu.cpp"/>
    <file name="src/Scintilla.cpp"/>
    <file name="src/GLCanvas.cpp"/>
