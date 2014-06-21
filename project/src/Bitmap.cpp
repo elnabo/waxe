@@ -37,6 +37,17 @@ value wx_bitmap_from_image(value img, value type)
 	return alloc_null();
 }
 
+value wx_bitmap_get_size(value bmp)
+{
+	wxBitmap * bitmap;
+	if (ValueToWX(bmp,bitmap))
+	{
+		return WXToValue(bitmap->GetSize());
+	}
+	return alloc_null();
+}
+
+DEFINE_PRIM(wx_bitmap_get_size,1)
 DEFINE_PRIM(wx_bitmap_from_bytes,1)
 DEFINE_PRIM(wx_bitmap_from_file,2)
 DEFINE_PRIM(wx_bitmap_from_image,2)

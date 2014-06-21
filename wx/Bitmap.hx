@@ -41,6 +41,11 @@ class Bitmap
    public var wxHandle:Dynamic;
 
    function new(inHandle:Dynamic) { wxHandle = inHandle; }
+   
+   public function size()
+   {
+	   return wx_bitmap_get_size(wxHandle);
+   }
 
    public static function fromBytes(inBytes:haxe.io.Bytes)
    {
@@ -64,6 +69,7 @@ class Bitmap
       return new Bitmap( wx_bitmap_from_image(img.wxHandle,type) );
    }
 
+   static var wx_bitmap_get_size = Loader.load("wx_bitmap_get_size",1);
    static var wx_bitmap_from_bytes = Loader.load("wx_bitmap_from_bytes",1);
    static var wx_bitmap_from_file = Loader.load("wx_bitmap_from_file",2);
    static var wx_bitmap_from_image = Loader.load("wx_bitmap_from_image",2);
