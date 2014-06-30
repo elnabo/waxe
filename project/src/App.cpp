@@ -91,6 +91,13 @@ value wx_get_waxe_works_version()
 }
 DEFINE_PRIM(wx_get_waxe_works_version,0);
 
+value wx_wake_up_idle()
+{
+   wxWakeUpIdle();
+   return alloc_null();
+}
+DEFINE_PRIM(wx_wake_up_idle,0);
+
 
 int link_App() { return 0; }
 

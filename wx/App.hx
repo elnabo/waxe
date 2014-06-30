@@ -5,7 +5,11 @@ class App
    static public var build(get, null):String;
    static public var ndllVersion(get, null):Int;
    static public var waxeWorksVersion(get, null):String;
-
+   
+   public static function wakeUpIdle()
+   {
+	   wx_wake_up_idle();
+   }
 
    public static function boot(inOnInit:Void -> Void)
    {
@@ -45,4 +49,5 @@ class App
    static var wx_quit = Loader.load("wx_quit",0);
    static var wx_get_ndll_version = Loader.load("wx_get_ndll_version", 0);
    static var wx_get_waxe_works_version = Loader.load("wx_get_waxe_works_version", 0);
+   static var wx_wake_up_idle = Loader.load("wx_wake_up_idle", 0);
 }

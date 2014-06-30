@@ -471,6 +471,12 @@ bool HaxeEventHandler::ProcessEvent(wxEvent& event)
 		alloc_field(obj,val_id("code"),alloc_int(code<=193 ?code:0));
 		alloc_field(obj,val_id("flashCode"),alloc_int(FlashCode(code)));
 	}
+	
+	wxIconizeEvent *ie = wxDynamicCast(&event,wxIconizeEvent);
+	if (ie)
+	{
+		alloc_field(obj,val_id("isIconized"),alloc_bool(ie->IsIconized()));
+	}
 
 	wxCommandEvent *ce = wxDynamicCast(&event,wxCommandEvent);
 	if (ce)

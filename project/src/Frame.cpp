@@ -1,5 +1,4 @@
 #include "HaxeAPI.h"
-
 value wx_frame_create(value inParams)
 {
    CreationParams params(inParams,wxDEFAULT_FRAME_STYLE);
@@ -36,6 +35,37 @@ value wx_top_level_window_set_icon(value inWindow, value inIcon)
 }
 
 DEFINE_PRIM(wx_top_level_window_set_icon,2)
+
+value wx_top_level_window_iconize(value inWindow, value iconize)
+{
+	wxTopLevelWindow * window;
+	if (ValueToWX(inWindow,window))
+	{
+		window->Iconize(Val2Bool(iconize));
+	}
+	return alloc_null();
+}
+
+DEFINE_PRIM(wx_top_level_window_iconize,2)
+
+value wx_top_level_window_is_iconized(value inWindow)
+{
+	wxTopLevelWindow * window;
+	if (ValueToWX(inWindow,window))
+	{
+		try
+		{
+			return alloc_bool(window->IsIconized());
+		}
+		catch(...)
+		{
+			return alloc_bool(false);
+		}
+	}
+	return alloc_null();
+}
+
+DEFINE_PRIM(wx_top_level_window_is_iconized,1)
 
 int link_Frame() { return 0; }
 
