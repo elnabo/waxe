@@ -40,7 +40,12 @@ class Bitmap
 {
    public var wxHandle:Dynamic;
 
-   function new(inHandle:Dynamic) { wxHandle = inHandle; }
+   function new(inHandle:Dynamic) 
+   { 
+	   wxHandle = inHandle; 
+       if (wxHandle == null)
+          throw "Invalid bitmap creation";
+   }
    
    public function size()
    {

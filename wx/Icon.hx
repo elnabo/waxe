@@ -10,6 +10,8 @@ class Icon
 	function new (handle:Dynamic)
 	{
 		wxHandle = handle;
+		if (wxHandle == null)
+			throw "Invalid icon creation";
 	}
 	
 	public static function createFromFile(path:String, type:WxBitmapType)

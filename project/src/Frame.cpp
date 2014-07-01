@@ -67,5 +67,24 @@ value wx_top_level_window_is_iconized(value inWindow)
 
 DEFINE_PRIM(wx_top_level_window_is_iconized,1)
 
+value wx_top_level_window_is_active(value inWindow)
+{
+	wxTopLevelWindow * window;
+	if (ValueToWX(inWindow,window))
+	{
+		try
+		{
+			return alloc_bool(window->IsActive());
+		}
+		catch(...)
+		{
+			return alloc_bool(false);
+		}
+	}
+	return alloc_null();
+}
+
+DEFINE_PRIM(wx_top_level_window_is_active,1)
+
 int link_Frame() { return 0; }
 

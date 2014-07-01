@@ -8,33 +8,54 @@ value wx_bitmap_from_bytes(value inBytes)
 	if (data.length)
 	{
 		wxMemoryInputStream stream(data.data,data.length);
-		wxBitmap *bitmap = new wxBitmap(wxImage(stream));
-		if (bitmap)
-			return WXToDeletingValue(bitmap);
+		try
+		{
+			wxBitmap *bitmap = new wxBitmap(wxImage(stream));
+			if (bitmap)
+				return WXToDeletingValue(bitmap);
+		}
+		catch(...)
+		{
+			return alloc_null();
+		}
 	}
 	return alloc_null();
 }
 
 value wx_bitmap_from_file(value name, value type)
 {	
-	wxBitmap * bitmap = new wxBitmap(Val2Str(name),Val2Int(type));
-	if (bitmap)
-		return WXToDeletingValue(bitmap);
-	return alloc_null();
+	try
+	{
+		wxBitmap * bitmap = new wxBitmap(Val2Str(name),Val2Int(type));
+		if (bitmap)
+			return WXToDeletingValue(bitmap);
+		return alloc_null();
+	}
+	catch (...)
+	{
+		return alloc_null();
+	}
 }
 
 value wx_bitmap_from_image(value img, value type)
 {	
-	wxImage * image;
-	if (!ValueToWX(img,image) || !image)
+	try
+	{
+		wxImage * image;
+		if (!ValueToWX(img,image) || !image)
+		{
+			return alloc_null();
+		}
+			
+		wxBitmap * bitmap = new wxBitmap(*image,Val2Int(type));
+		if (bitmap)
+			return WXToDeletingValue(bitmap);
+		return alloc_null();
+	}
+	catch (...)
 	{
 		return alloc_null();
 	}
-		
-	wxBitmap * bitmap = new wxBitmap(*image,Val2Int(type));
-	if (bitmap)
-		return WXToDeletingValue(bitmap);
-	return alloc_null();
 }
 
 value wx_bitmap_get_size(value bmp)

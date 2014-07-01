@@ -3,37 +3,59 @@
 
 value wx_image_from_file(value name, value type)
 {	
-	wxImage * image = new wxImage(Val2Str(name),Val2Int(type));
-	if (image)
-		return WXToDeletingValue(image);
-	return alloc_null();
+	try
+	{
+		wxImage * image = new wxImage(Val2Str(name),Val2Int(type));
+		if (image)
+			return WXToDeletingValue(image);
+		return alloc_null();
+	}
+	catch (...)
+	{
+		return alloc_null();
+	}
 }
 
 value wx_image_blank(value width, value height)
 {
-	wxImage * image = new wxImage(Val2Int(width),Val2Int(height),true);
-	if (image)
-		return WXToDeletingValue(image);
-	return alloc_null();
+	try
+	{
+		wxImage * image = new wxImage(Val2Int(width),Val2Int(height),true);
+		if (image)
+			return WXToDeletingValue(image);
+		return alloc_null();
+	}
+	catch (...)
+	{
+		return alloc_null();
+	}
 }
 
-void wx_image_rescale(value src, value width, value height, value quality)
+value wx_image_rescale(value src, value width, value height, value quality)
 {
 	wxImage * image;
 	if (!ValueToWX(src,image) || !image)
-		return ;
+		return alloc_null();
 	image->Rescale(Val2Int(width),Val2Int(height),static_cast<wxImageResizeQuality>(Val2Int(quality)));
+	return alloc_null();
 }
 
 value wx_image_copy(value img)
 {
-	wxImage * image;		
-	if (!ValueToWX(img,image) || !image)
-		return alloc_null();
+	try
+	{
+		wxImage * image;		
+		if (!ValueToWX(img,image) || !image)
+			return alloc_null();
 		
-	wxImage * copy = new wxImage(image->GetSize(),true);
-	copy->Paste(*image,0,0);
-	return WXToDeletingValue(copy);
+		wxImage * copy = new wxImage(image->GetSize(),true);
+		copy->Paste(*image,0,0);
+		return WXToDeletingValue(copy);
+	}
+	catch (...)
+	{
+		return alloc_null();
+	}
 }
 
 value wx_image_width(value img)

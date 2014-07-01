@@ -25,7 +25,16 @@ class TopLevelWindow extends Window
 	   throw "isIconized error";		
    }
    
+   public function isActive():Null<Bool>
+   {
+	   var res = wx_top_level_window_is_active(wxHandle);
+	   if (res != null)
+	       return res;
+	   throw "isActive error";
+   }
+   
    static var wx_top_level_window_set_icon = Loader.load("wx_top_level_window_set_icon",2);
    static var wx_top_level_window_iconize = Loader.load("wx_top_level_window_iconize",2);
    static var wx_top_level_window_is_iconized = Loader.load("wx_top_level_window_is_iconized",1);
+   static var wx_top_level_window_is_active = Loader.load("wx_top_level_window_is_active",1);
 }

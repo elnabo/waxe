@@ -23,6 +23,8 @@ class Image
 	function new(inHandle:Dynamic, ?w:Int=-1, ?h:Int=-1) 
 	{ 
 		wxHandle = inHandle; 
+		if (wxHandle == null)
+			throw "Invalid image creation";
 		
 		width = init_width = wx_image_width(wxHandle);
 		height = init_height = wx_image_height(wxHandle);
