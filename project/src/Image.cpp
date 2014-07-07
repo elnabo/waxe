@@ -1,6 +1,8 @@
 #include "HaxeAPI.h"
 #include <wx/mstream.h>
 
+#include <iostream>
+
 value wx_image_from_file(value name, value type)
 {	
 	try
@@ -63,7 +65,6 @@ value wx_image_width(value img)
 	wxImage * image;
 	if (!ValueToWX(img,image) || !image)
 		return alloc_int(-1);
-		
 	return alloc_int(image->GetWidth());
 }
 
@@ -76,11 +77,51 @@ value wx_image_height(value img)
 	return alloc_int(image->GetHeight());
 }
 
+value wx_image_save_file(value img, value type, value tmpName)
+{
+	wxImage * image;
+	if (!ValueToWX(img,image) || !image)
+		return alloc_null();
+		
+	//~ image->SaveFile(Val2Str(tmpName), Val2Int(type));
+	image->SaveFile(Val2Str(tmpName), image->GetType());	
+	return alloc_null();
+}
+
+value wx_image_get_type(value img)
+{
+	wxImage * image;
+	if (!ValueToWX(img,image) || !image)
+		return alloc_null();
+	return alloc_int(image->GetType());
+}
+
+value wx_image_rotate(value img, value degree)
+{
+	wxImage * image;
+	if (!ValueToWX(img,image) || !image)
+		return alloc_null();
+		
+	double pi = 3.14159265358979323846;
+	wxImage rotation = image->Rotate(pi*Val2Int(degree)/180.0, wxPoint(image->GetWidth()/2,image->GetHeight()/2));
+	wxImage * res = new wxImage(rotation.GetWidth(),rotation.GetHeight());
+	res->Paste(rotation,0,0);
+	if (res)
+	{
+		res->SetType(image->GetType());
+		return WXToDeletingValue(res);
+	}
+	return alloc_null();
+}
+
 DEFINE_PRIM(wx_image_from_file,2)
 DEFINE_PRIM(wx_image_blank,2)
 DEFINE_PRIM(wx_image_rescale,4)
 DEFINE_PRIM(wx_image_copy,1)
 DEFINE_PRIM(wx_image_width,1)
 DEFINE_PRIM(wx_image_height,1)
+DEFINE_PRIM(wx_image_save_file,3)
+DEFINE_PRIM(wx_image_get_type,1)
+DEFINE_PRIM(wx_image_rotate,2)
 
 int link_Image() { return 0; }
