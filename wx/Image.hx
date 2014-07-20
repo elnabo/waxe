@@ -80,7 +80,7 @@ class Image
 	
 	public function rotate(angle:Int):Image
 	{
-		wxHandle = wx_image_rotate(wxHandle,90);
+		wxHandle = wx_image_rotate(wxHandle,angle);
 		
 		var tmp = width;
 		width = height;
