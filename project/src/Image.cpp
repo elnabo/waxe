@@ -83,7 +83,6 @@ value wx_image_save_file(value img, value type, value tmpName)
 	if (!ValueToWX(img,image) || !image)
 		return alloc_null();
 		
-	//~ image->SaveFile(Val2Str(tmpName), Val2Int(type));
 	image->SaveFile(Val2Str(tmpName), image->GetType());	
 	return alloc_null();
 }
@@ -96,14 +95,32 @@ value wx_image_get_type(value img)
 	return alloc_int(image->GetType());
 }
 
+value wx_image_rotate90(value img, value clockwise)
+{
+	wxImage * image;
+	if (!ValueToWX(img,image) || !image)
+		return alloc_null();
+		
+	wxImage rotation = image->Rotate90(Val2Bool(clockwise));
+	wxImage * res = new wxImage(rotation.GetWidth(),rotation.GetHeight());
+	res->Paste(rotation,0,0);
+	if (res)
+	{
+		res->SetType(image->GetType());
+		return WXToDeletingValue(res);
+	}
+	return alloc_null();
+}
+
 value wx_image_rotate(value img, value degree)
 {
 	wxImage * image;
 	if (!ValueToWX(img,image) || !image)
 		return alloc_null();
 		
-	double pi = 3.14159265358979323846;
-	wxImage rotation = image->Rotate(pi*Val2Int(degree)/180.0, wxPoint(image->GetWidth()/2,image->GetHeight()/2));
+	double pi = 3.141592653589793238462643383279502884197;
+	double frac = ((double) Val2Int(degree))/ 180.0;
+	wxImage rotation = image->Rotate(pi*frac, wxPoint(image->GetWidth()/2,image->GetHeight()/2));
 	wxImage * res = new wxImage(rotation.GetWidth(),rotation.GetHeight());
 	res->Paste(rotation,0,0);
 	if (res)
@@ -122,6 +139,7 @@ DEFINE_PRIM(wx_image_width,1)
 DEFINE_PRIM(wx_image_height,1)
 DEFINE_PRIM(wx_image_save_file,3)
 DEFINE_PRIM(wx_image_get_type,1)
+DEFINE_PRIM(wx_image_rotate90,2)
 DEFINE_PRIM(wx_image_rotate,2)
 
 int link_Image() { return 0; }

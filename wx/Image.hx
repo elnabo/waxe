@@ -93,6 +93,21 @@ class Image
 		return this;
 	}
 	
+	public function rotate90(clockwise:Bool=true):Image
+	{
+		wxHandle = wx_image_rotate90(wxHandle,clockwise);
+		
+		var tmp = width;
+		width = height;
+		height = tmp;
+		
+		tmp = init_width;
+		init_width = init_height;
+		init_height = tmp;
+		
+		return this;
+	}
+	
    static var wx_image_from_file = Loader.load("wx_image_from_file",2);
    static var wx_image_blank = Loader.load("wx_image_blank",2);
    static var wx_image_rescale = Loader.load("wx_image_rescale",4);
@@ -101,6 +116,7 @@ class Image
    static var wx_image_height = Loader.load("wx_image_height",1);
    static var wx_image_save_file = Loader.load("wx_image_save_file",3);
    static var wx_image_get_type = Loader.load("wx_image_get_type",1);
+   static var wx_image_rotate90 = Loader.load("wx_image_rotate90",2);
    static var wx_image_rotate = Loader.load("wx_image_rotate",2);
    
 }
